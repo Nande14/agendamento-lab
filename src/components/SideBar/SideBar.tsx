@@ -21,7 +21,7 @@ export function SideBar() {
     const btnRef = React.useRef<HTMLButtonElement>(null);
     const navigation = useRouter();
 
-    const superAdmin =    [
+    const adminstrador =    [
         { label: "Agendamento", path: "/" },
         { label: "Professores", path: "/teacher" },
         { label: "Diciplinas", path: "/discipline" },
@@ -59,14 +59,8 @@ export function SideBar() {
                     <IconExit>
                         <DrawerCloseButton />
                     </IconExit>
-                    <DrawerHeader>
-                        <Header>
-                            <p>LAB B208</p>
-                        </Header>
-                    </DrawerHeader>
-
                     <DrawerBody>
-                        {superAdmin.map((item, index) => (
+                        {adminstrador.map((item, index) => (
                             <Text
                                 key={index}
                                 color="#404040"
