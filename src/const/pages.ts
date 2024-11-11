@@ -1,7 +1,3 @@
 export const headerRoutes = ["/login"];
 
-export const layoutRoutes = [
-  "/",
-  "/teacher",
-  "/events",
-];
+export const layoutRoutes = ["/", "/teacher", "/events"];

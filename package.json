@@ -21,7 +21,8 @@
     "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "unicap-evens": "file:"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -11,10 +11,9 @@ export const ContainerRegister = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    magin-top: 50%;
+    margin-top: 50%;
     height: 100vh;
 `;
-
 
 export const ImageContainer = styled.div`
     margin-bottom: 20px;
