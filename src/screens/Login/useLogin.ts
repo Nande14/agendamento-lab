@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export const useLogin = () => {
   const router = useRouter();
@@ -13,17 +14,19 @@ export const useLogin = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://marcacao-sala.onrender.com/auth/login",
+        "https://agendamentoback-h2i55nsa.b4a.run/user/login",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ username: email, password: password }),
         }
       );
 
-      if (response.ok) {
+      console.log({ response });
+
+      /* if (response.ok) {
         const data = await response.json();
         const token = data.token; // Assume que a resposta contém o token
 
@@ -32,7 +35,7 @@ export const useLogin = () => {
         router.push("/");
       } else {
         setError("Erro ao fazer login. Verifique suas credenciais.");
-      }
+      } */
     } catch (error) {
       setError("Erro ao fazer login. Por favor, tente novamente mais tarde.");
     } finally {
