@@ -23,6 +23,7 @@ export function SideBar() {
     { label: "Agendamento", path: "/" },
     { label: "Professores", path: "/teacher" },
     { label: "Diciplinas", path: "/discipline" },
+    { label: "Calendário", path: "/calendar" },
   ];
 
   const handleLogout = () => {

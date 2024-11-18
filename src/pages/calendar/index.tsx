@@ -1,5 +1,5 @@
-import { CalendarAdmin } from "@/screens/Calendar";
+import { Calendar } from "@/screens/Calendar";
 
 export default function CalendarPage() {
-  return <CalendarAdmin />;
+  return <Calendar />;
 }
