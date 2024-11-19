@@ -28,27 +28,23 @@ const dayStyles = {
 
 type AvailabilityStatus = "available" | "checked" | "removed" | "holiday";
 
+const statuses: Array<AvailabilityStatus> = [
+  "available",
+  "checked",
+  "removed",
+  "holiday",
+];
+
+const foo: Array<{ day: number; availability: AvailabilityStatus }> =
+  Array.from({ length: 28 }, (_, index) => ({
+    day: index + 1,
+    availability: statuses[Math.floor(Math.random() * statuses.length)],
+  }));
+
 export const useDatePicker = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-  // ALERT REMOVER APÓS CONECTAR COM API
-
-  const statuses: Array<AvailabilityStatus> = [
-    "available",
-    "checked",
-    "removed",
-    "holiday",
-  ];
-
-  // ALERT REMOVER APÓS CONECTAR COM API
-
-  const foo: Array<{ day: number; availability: AvailabilityStatus }> =
-    Array.from({ length: 28 }, (_, index) => ({
-      day: index + 1,
-      availability: statuses[Math.floor(Math.random() * statuses.length)],
-    }));
 
   const handleChooseDayStyle = (day: number): TDayStyleReturn => {
     const currentDay = foo ? foo?.find((item) => item?.day === day) : null;
