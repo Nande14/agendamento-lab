@@ -29,11 +29,8 @@ export const InfoContainer = styled.section`
 export const InfoTitle = styled.p`
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 24px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 24px;
 `;
 
 export const InfoList = styled.ul`
@@ -46,7 +43,7 @@ export const InfoList = styled.ul`
 export const InfoItem = styled.li`
   color: #8c8585;
   font-family: Inter;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 `;
 
@@ -60,24 +57,26 @@ export const CalendarTitle = styled.p`
 export const CalendarSubtitle = styled.p`
   color: rgba(26, 26, 26, 0.61);
   text-align: center;
-  font-size: 18.594px;
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 `;
 
 export const ButtonsContainer = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
 
-  margin-top: 20px;
+  margin-top: 1.25rem;
 
   background-color: #f0f0f0;
   width: 114px;
   height: 70px;
 
-  gap: 4px;
-  border-radius: 4px;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
 `;
 
 export const ActionButton = styled.button`
@@ -90,6 +89,8 @@ export const ActionButton = styled.button`
 export const CalendarContainer = styled.section`
   width: 399px;
   height: 698px;
+
+  padding: 1.25rem;
 
   display: flex;
   flex-direction: column;

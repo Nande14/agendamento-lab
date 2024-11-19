@@ -1,9 +1,54 @@
 import { MouseEvent, useState } from "react";
+import { TDayStyleReturn } from "./types";
+
+const dayStyles = {
+  available: {
+    backgroundColor: "#FAA635",
+    fontColor: "#FFFFFF",
+    borderColor: "#FAA635",
+  },
+  checked: {
+    backgroundColor: "#FFFFFF",
+    fontColor: "#8C8585",
+    borderColor: "#8C8585",
+  },
+  removed: {
+    backgroundColor: "#8C8585",
+    fontColor: "#FFFFFF",
+    borderColor: "#8C8585",
+  },
+  holiday: {
+    backgroundColor: "#7B2D2F",
+    fontColor: "#FFFFFF",
+    borderColor: "#7B2D2F",
+  },
+};
+
+// ALERT REMOVER APÓS CONECTAR COM API
+
+const statuses = ["available", "checked", "removed", "holiday"];
+
+const foo: Array<{ day: number; availability: string }> = Array.from(
+  { length: 28 },
+  (_, index) => ({
+    day: index + 1,
+    availability: statuses[Math.floor(Math.random() * statuses.length)],
+  })
+);
 
 export const useDatePicker = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleChooseDayStyle = (day: number): TDayStyleReturn => {
+    const currentDay = foo ? foo?.find((item) => item?.day === day) : null;
+    const dayAvailability = currentDay?.availability;
+
+    const dayStyle = dayStyles[dayAvailability];
+
+    return dayStyle;
+  };
 
   const nextMonth = () => {
     if (currentMonth < 11) {
@@ -23,16 +68,12 @@ export const useDatePicker = () => {
     }
   };
 
-  const handleSelectDate = (event: MouseEvent<HTMLDivElement>) => {
-    if ((event.target as HTMLElement).id === "day") {
-      setSelectedDate(
-        new Date(
-          currentYear,
-          currentMonth,
-          Number((event.target as HTMLElement).getAttribute("data-day"))
-        )
-      );
-    }
+  const handleSelectDate = (event: MouseEvent<HTMLButtonElement>) => {
+    setSelectedDate(
+      new Date(currentYear, currentMonth, Number(event?.currentTarget?.value))
+    );
+
+    console.log(event?.currentTarget?.value);
   };
 
   return {
@@ -42,5 +83,6 @@ export const useDatePicker = () => {
     currentYear,
     selectedDate,
     handleSelectDate,
+    handleChooseDayStyle,
   };
 };

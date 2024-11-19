@@ -132,12 +132,6 @@ const ScheduleManagement = () => {
     }
   };
 
-  useEffect(() => {
-    fetchTeachers();
-    fetchSubjects();
-    fetchSchedules();
-  }, []);
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -214,6 +208,12 @@ const ScheduleManagement = () => {
       console.error("Erro ao excluir agendamento:", error);
     }
   };
+
+  useEffect(() => {
+    fetchTeachers();
+    fetchSubjects();
+    fetchSchedules();
+  }, []);
 
   return (
     <>

@@ -12,6 +12,9 @@ import {
   InfoTitle,
 } from "./styles";
 import { IViewCalendar } from "./types";
+import Image from "next/image";
+
+import catolica from "../../../public/catholic.png";
 
 export const ViewCalendar = ({
   handleLiberate,
@@ -21,10 +24,13 @@ export const ViewCalendar = ({
   return (
     <Container>
       <InfoContainer>
-        <img
-          src="../../../public/catholic"
-          alt="Logo da universidade catótilca"
+        <Image
+          src={catolica}
+          alt="Logo da universidade católica"
+          width={1000}
+          height={1000}
         />
+
         <InfoTitle>Laboratório 208 - Bloco B</InfoTitle>
 
         <InfoList>

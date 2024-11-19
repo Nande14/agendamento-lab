@@ -2,7 +2,11 @@ import { dayNames, monthNames } from "@/const/date";
 import {
   ButtonBackMonth,
   ButtonNextMonth,
-  DayOfWeek,
+  DayContainer,
+  DayNumber,
+  DayOfWeekContainer,
+  DayOfWeekText,
+  EmptyContainer,
   LeftArrowIcon,
   MonthAndYearText,
   PickerBody,
@@ -12,17 +16,16 @@ import {
   SevenColGrid,
 } from "./styles";
 import { IViewDatePicker } from "./types";
-import {
-  getDaysWithNulls,
-} from "@/utils";
+import { getDaysWithNulls } from "@/utils";
 
 export const ViewDatePicker = ({
   prevMonth,
   nextMonth,
   currentMonth,
   currentYear,
-  selectedDate,
+  //selectedDate,
   handleSelectDate,
+  handleChooseDayStyle,
 }: IViewDatePicker) => {
   return (
     <PickerContainer>
@@ -41,31 +44,31 @@ export const ViewDatePicker = ({
       </PickerHeader>
 
       <PickerBody>
-        <SevenColGrid heading>
+        <SevenColGrid>
           {dayNames.map((day) => (
-            <DayOfWeek>{day}</DayOfWeek>
+            <DayOfWeekContainer>
+              <DayOfWeekText>{day}</DayOfWeekText>
+            </DayOfWeekContainer>
           ))}
         </SevenColGrid>
 
-        <SevenColGrid onClick={handleSelectDate}>
-          {getDaysWithNulls(currentYear, currentMonth).map((day, index) =>
-            day === null ? (
-              <p key={index} className="empty"></p>
-            ) : (
-              <p
-                key={index}
-                id="day"
-                data-day={day}
-                className={
-                  selectedDate?.getTime() ===
-                  new Date(currentYear, currentMonth, day).getTime()
-                    ? "active"
-                    : ""
-                }
-              >
-                {day}
-              </p>
-            )
+        <SevenColGrid>
+          {getDaysWithNulls(currentYear, currentMonth).map(
+            (day: number, index) =>
+              day === null ? (
+                <EmptyContainer />
+              ) : (
+                <DayContainer
+                  key={index}
+                  dayStyle={handleChooseDayStyle(day)}
+                  value={day}
+                  onClick={(event) => {
+                    handleSelectDate(event);
+                  }}
+                >
+                  <DayNumber>{day}</DayNumber>
+                </DayContainer>
+              )
           )}
         </SevenColGrid>
       </PickerBody>
