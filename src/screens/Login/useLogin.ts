@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 
 export const useLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://agendamentoback-h2i55nsa.b4a.run/user/login",
@@ -20,31 +19,28 @@ export const useLogin = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: email, password: password }),
+          body: JSON.stringify({ userEmail: email, userPassword: password }),
         }
       );
 
-      console.log({ response });
-
-      /* if (response.ok) {
+      if (response.ok) {
         const data = await response.json();
-        const token = data.token; // Assume que a resposta contém o token
-
-        localStorage.setItem("token", token);
+        const { access_token } = data;
+        localStorage.setItem("token", access_token);
 
         router.push("/");
       } else {
         setError("Erro ao fazer login. Verifique suas credenciais.");
-      } */
+      }
     } catch (error) {
       setError("Erro ao fazer login. Por favor, tente novamente mais tarde.");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return {
-    loading,
+    isLoading,
     error,
     setPassword,
     password,

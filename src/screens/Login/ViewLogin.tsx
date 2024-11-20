@@ -1,15 +1,10 @@
 import Head from "next/head";
 import { Button, FormControl, Input } from "@chakra-ui/react";
-import {
-  Container,
-  LoginContainer,
-  ContainerRegister,
-  ButtonContainer,
-} from "./styles";
+import { Container, LoginContainer, ButtonContainer } from "./styles";
 import { IViewLogin } from "./types";
 
 export const ViewLogin = ({
-  loading,
+  isLoading,
   error,
   setPassword,
   password,
@@ -52,7 +47,7 @@ export const ViewLogin = ({
                   _hover={{ bg: "green.500" }}
                   color="white"
                   type="submit"
-                  isLoading={loading}
+                  isLoading={isLoading}
                 >
                   Entrar
                 </Button>
@@ -60,9 +55,6 @@ export const ViewLogin = ({
             </FormControl>
           </form>
         </LoginContainer>
-        {/* <ContainerRegister>
-                    Seu conteúdo aqui
-                </ContainerRegister> */}
       </Container>
     </>
   );

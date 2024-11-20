@@ -1,7 +1,7 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
 export interface IViewLogin {
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
   setPassword: Dispatch<SetStateAction<string>>;
   password: string;
