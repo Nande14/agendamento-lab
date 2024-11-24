@@ -9,7 +9,7 @@ export type TDayStyleReturn = {
 export type TAvailabilityStatus = "available" | "checked" | "removed" | "holiday";
 
 export interface IDatePicker {
-  handlePickDate: (date: string) => void;
+  handlePickDate?: (date: string) => void;
 }
 
 export interface IUseDatePicker extends IDatePicker {}

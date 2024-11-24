@@ -24,6 +24,7 @@ export function SideBar() {
     { label: "Professores", path: "/professor" },
     { label: "Diciplinas", path: "/discipline" },
     { label: "Calendário", path: "/calendar" },
+    { label: "Reservas", path: "/reservation" },
   ];
 
   const handleLogout = () => {

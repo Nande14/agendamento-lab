@@ -6,8 +6,6 @@ export const useCalendarManagement = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log({ selectedDate });
-
   const handlePickDate = (date: string) => {
     setSelectedDate(date);
   };

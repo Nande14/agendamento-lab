@@ -1,42 +1,54 @@
-// ReservationView.tsx
-import React from "react";
 import styled from "styled-components";
 
-export const Container = styled.div`
-  padding: 20px;
-  font-family: Arial, sans-serif;
+export const ReservationContainer = styled.section`
+  width: 91.25rem;
+  height: 54rem;
+
+  background-color: white;
+
+  display: flex;
+  flex-direction: row;
+
+  margin: 0 auto;
 `;
 
-export const Title = styled.h2`
-  font-size: 24px;
-  color: #333;
+export const CalendarContainer = styled.section`
+  width: 399px;
+  height: 698px;
+
+  padding: 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+export const InfoTitle = styled.p`
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  margin: 4rem 0 7rem 0;
 `;
 
-export const TableHeader = styled.th`
-  padding: 12px;
-  background-color: #f4f4f4;
-  color: #333;
-  border: 1px solid #ddd;
-  font-size: 14px;
+export const ReservationViewerContainer = styled.section`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 10rem;
+  padding: 5rem 0;
 `;
 
-export const TableCell = styled.td`
-  padding: 12px;
-  text-align: left;
-  border: 1px solid #ddd;
-  font-size: 14px;
-`;
-
-export const TableRow = styled.tr<{ even?: boolean }>`
-  background-color: ${({ even }) => (even ? "#f9f9f9" : "white")};
-
-  &:hover {
-    background-color: #f1f1f1;
-  }
+export const ReservationViewerTitle = styled.p`
+  color: #000;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-weight: 700;
 `;
