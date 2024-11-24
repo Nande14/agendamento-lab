@@ -27,7 +27,7 @@ const reservations: Reservation[] = [
   // Outras reservas
 ];
 
-export const ReservationView: React.FC = () => {
+export const ReservationScreen: React.FC = () => {
   return (
     <Container>
       <Title>Visualização de Reservas</Title>

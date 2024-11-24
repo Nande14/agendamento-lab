@@ -1,5 +1,6 @@
-import { MouseEvent, useState } from "react";
-import { TDayStyleReturn } from "./types";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
+import { IUseDatePicker, TAvailabilityStatus, TDayStyleReturn } from "./types";
+import axios from "axios";
 
 const dayStyles = {
   available: {
@@ -24,32 +25,74 @@ const dayStyles = {
   },
 };
 
-// ALERT REMOVER APÓS CONECTAR COM API
-
-type AvailabilityStatus = "available" | "checked" | "removed" | "holiday";
-
-const statuses: Array<AvailabilityStatus> = [
-  "available",
-  "checked",
-  "removed",
-  "holiday",
-];
-
-const foo: Array<{ day: number; availability: AvailabilityStatus }> =
-  Array.from({ length: 28 }, (_, index) => ({
-    day: index + 1,
-    availability: statuses[Math.floor(Math.random() * statuses.length)],
-  }));
-
-export const useDatePicker = () => {
+export const useDatePicker = ({ handlePickDate }: IUseDatePicker) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [monthDaysAvailability, setMonthDaysAvailability] = useState<
+    [] | Array<{ date: string; status: TAvailabilityStatus }>
+  >([]);
+
+  const getMonthDaysAvailability = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Token not found");
+      }
+
+      const response = await axios.get(
+        `https://agendamentoback-h2i55nsa.b4a.run/calendar/month-data?year=${currentYear}&month=${
+          currentMonth + 1
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMonthDaysAvailability(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar status de dispobilidade:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentYear, currentMonth]);
+
+  useEffect(() => {
+    getMonthDaysAvailability();
+  }, [currentMonth]);
+
+  const formatMonthDaysAvailability = () => {
+    const formattedMonthDaysAvailability = monthDaysAvailability.map((item) => {
+      const [, , day] = item.date.split("-");
+
+      if (day.startsWith("0")) {
+        const newDay = day.slice(1, 2);
+
+        return {
+          day: Number(newDay),
+          status: item.status,
+        };
+      }
+
+      return {
+        day: Number(day),
+        status: item.status,
+      };
+    });
+
+    return { formattedMonthDaysAvailability };
+  };
 
   const handleChooseDayStyle = (day: number): TDayStyleReturn => {
-    const currentDay = foo ? foo?.find((item) => item?.day === day) : null;
-    const dayAvailability: AvailabilityStatus =
-      currentDay?.availability ?? "checked";
+    const { formattedMonthDaysAvailability } = formatMonthDaysAvailability();
+
+    const currentDay = formattedMonthDaysAvailability
+      ? formattedMonthDaysAvailability?.find((item) => item?.day === day)
+      : null;
+    const dayAvailability: TAvailabilityStatus =
+      currentDay?.status ?? "available";
 
     const dayStyle = dayStyles[dayAvailability];
 
@@ -75,11 +118,15 @@ export const useDatePicker = () => {
   };
 
   const handleSelectDate = (event: MouseEvent<HTMLButtonElement>) => {
-    setSelectedDate(
-      new Date(currentYear, currentMonth, Number(event?.currentTarget?.value))
+    const selectedDate = new Date(
+      currentYear,
+      currentMonth,
+      Number(event?.currentTarget?.value)
     );
 
-    console.log(event?.currentTarget?.value);
+    const formattedDate = selectedDate.toISOString().split("T")[0];
+
+    handlePickDate(formattedDate);
   };
 
   return {
@@ -87,7 +134,6 @@ export const useDatePicker = () => {
     nextMonth,
     currentMonth,
     currentYear,
-    selectedDate,
     handleSelectDate,
     handleChooseDayStyle,
   };

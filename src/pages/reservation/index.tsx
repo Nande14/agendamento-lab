@@ -1,5 +1,5 @@
-import { ReservationView } from "@/screens/Reservation";
+import { ReservationScreen } from "@/screens/Reservation";
 
 export default function ReservationPage() {
-  return <ReservationView />;
+  return <ReservationScreen />;
 }

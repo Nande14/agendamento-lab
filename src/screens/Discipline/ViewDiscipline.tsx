@@ -3,7 +3,6 @@ import {
   Button,
   Spinner,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -14,11 +13,11 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Container, TitlePage, Title, ButtonWrapper, Main } from "./style";
-import ModalCreateDiscipline from "@/components/Modals/ModalCreateDicipline";
-import DisciplineDetails from "@/components/Modals/ModalDicipline";
+import ModalCreateDiscipline from "@/components/Modals/DisciplineCreation";
+import { ConsumptionDisciplineModal } from "@/components/Modals/DisciplineManagement";
 import { IViewDicipline } from "./types";
 
-export const ViewDicipline = ({
+export const ViewDiscipline = ({
   handleOpenModalCreate,
   loading,
   subjects,
@@ -92,7 +91,7 @@ export const ViewDicipline = ({
             isOpen={isModalCreateOpen}
             onClose={handleCloseModalCreate}
           />
-          <DisciplineDetails
+          <ConsumptionDisciplineModal
             disciplineId={selectedDisciplineId}
             onClose={handleCloseDisciplineDetails}
             onDisciplineUpdated={fetchSubjects}

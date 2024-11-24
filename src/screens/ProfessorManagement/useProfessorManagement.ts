@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { ITeacher } from "./types";
 
-export const useTeacher = () => {
+export const useProfessorManagement = () => {
   const [teachers, setTeachers] = useState<ITeacher[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(
@@ -20,7 +20,7 @@ export const useTeacher = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            "https://marcacao-sala.onrender.com/teacher",
+            "https://agendamentoback-h2i55nsa.b4a.run/professor/get-all-professors",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

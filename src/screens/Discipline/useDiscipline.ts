@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { Subject } from "./types";
 
-export const useDicipline = () => {
+export const useDiscipline = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -21,7 +21,7 @@ export const useDicipline = () => {
       }
 
       const response = await axios.get(
-        "https://marcacao-sala.onrender.com/subject",
+        "https://agendamentoback-h2i55nsa.b4a.run/discipline/get-all-disciplines",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ export const useDicipline = () => {
 
   const handleCloseDisciplineDetails = () => {
     setSelectedDisciplineId(null);
-    fetchSubjects(); // Refresh the list after editing or deleting a discipline
+    fetchSubjects();
   };
 
   return {

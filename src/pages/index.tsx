@@ -6,7 +6,7 @@ import {
   ScheduleListContainer,
   Container,
   Main,
-} from "@/screens/Dicipline/style";
+} from "@/screens/Discipline/style";
 import {
   Heading,
   VStack,
@@ -25,20 +25,20 @@ import {
   Select,
 } from "@chakra-ui/react";
 
-interface Teacher {
+type TTeacher = {
   id: number;
   name: string;
 }
 
-interface Subject {
+type TDiscipline = {
   id: number;
   name: string;
 }
 
 interface Schedule {
   id: string;
-  teacher: Teacher;
-  subject: Subject;
+  teacher: TTeacher;
+  discipline: TDiscipline;
   start_time: string;
   end_time: string;
 }
@@ -63,8 +63,8 @@ const ScheduleManagement = () => {
     start_time: "",
     end_time: "",
   });
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [teachers, setTeachers] = useState<TTeacher[]>([]);
+  const [subjects, setSubjects] = useState<TDiscipline[]>([]);
 
   const fetchTeachers = async () => {
     try {
@@ -73,8 +73,8 @@ const ScheduleManagement = () => {
         console.error("Token de autorização não encontrado.");
         return;
       }
-      const response = await axios.get<Teacher[]>(
-        "https://marcacao-sala.onrender.com/teacher",
+      const response = await axios.get<TTeacher[]>(
+        "https://agendamentoback-h2i55nsa.b4a.run/professor/get-all-professors",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,8 +94,8 @@ const ScheduleManagement = () => {
         console.error("Token de autorização não encontrado.");
         return;
       }
-      const response = await axios.get<Subject[]>(
-        "https://marcacao-sala.onrender.com/subject",
+      const response = await axios.get<TDiscipline[]>(
+        "https://agendamentoback-h2i55nsa.b4a.run/discipline/get-all-disciplines",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -117,7 +117,7 @@ const ScheduleManagement = () => {
         return;
       }
       const response = await axios.get<Schedule[]>(
-        "https://marcacao-sala.onrender.com/schedule",
+        "https://agendamentoback-h2i55nsa.b4a.run/schedule/get-all-schedules",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -163,10 +163,12 @@ const ScheduleManagement = () => {
         subject_id: Number(formData.subject_id),
         start_time: new Date(formData.start_time).toISOString(),
         end_time: new Date(formData.end_time).toISOString(),
+        description: "Dado mockado",
+        class: "Dado mockado",
       };
 
       const response = await axios.post<Schedule>(
-        "https://marcacao-sala.onrender.com/schedule",
+        "https://agendamentoback-h2i55nsa.b4a.run/schedule/register-schedule",
         dataToSend,
         {
           headers: {
@@ -198,11 +200,14 @@ const ScheduleManagement = () => {
         console.error("Token de autorização não encontrado.");
         return;
       }
-      await axios.delete(`https://marcacao-sala.onrender.com/schedule/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://agendamentoback-h2i55nsa.b4a.run/schedule/delete-schedule/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setSchedules(schedules.filter((schedule) => schedule.id !== id));
     } catch (error) {
       console.error("Erro ao excluir agendamento:", error);
@@ -304,8 +309,8 @@ const ScheduleManagement = () => {
                   <Tbody>
                     {schedules.map((schedule) => (
                       <Tr key={schedule.id}>
-                        <Td>{schedule.teacher.name}</Td>
-                        <Td>{schedule.subject.name}</Td>
+                        <Td>{schedule?.teacher?.name}</Td>
+                        <Td>{schedule?.discipline?.name}</Td>
                         <Td>{formatDateTime(schedule.start_time)}</Td>
                         <Td>{formatDateTime(schedule.end_time)}</Td>
                         <Td>

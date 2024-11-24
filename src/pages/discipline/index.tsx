@@ -1,5 +1,5 @@
-import { DiciplineScreen } from "@/screens/Dicipline";
+import { DisciplineScreen } from "@/screens/Discipline";
 
-export default function SubjectManagement() {
-  return <DiciplineScreen />;
+export default function SubjectManagementPage() {
+  return <DisciplineScreen />;
 }

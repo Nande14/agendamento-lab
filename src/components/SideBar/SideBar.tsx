@@ -21,7 +21,7 @@ export function SideBar() {
 
   const adminstrador = [
     { label: "Agendamento", path: "/" },
-    { label: "Professores", path: "/teacher" },
+    { label: "Professores", path: "/professor" },
     { label: "Diciplinas", path: "/discipline" },
     { label: "Calendário", path: "/calendar" },
   ];

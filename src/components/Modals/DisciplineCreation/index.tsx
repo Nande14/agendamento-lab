@@ -14,19 +14,17 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-interface ModalCreateTeacherProps {
+interface ModalCreateDisciplineProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
+const ModalCreateDiscipline: React.FC<ModalCreateDisciplineProps> = ({
   isOpen,
   onClose,
 }) => {
   const initialFormData = {
     name: "",
-    email: "",
-    employee_id: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -46,11 +44,11 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
       setLoading(true);
       const token = localStorage.getItem("token");
       if (!token) {
-        return;
+        throw new Error("Token not found");
       }
 
       const response = await axios.post(
-        "https://marcacao-sala.onrender.com/teacher/",
+        "https://agendamentoback-h2i55nsa.b4a.run/discipline/create-discipline",
         formData,
         {
           headers: {
@@ -58,10 +56,10 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
           },
         }
       );
-      console.log("Professor criado com sucesso:", response.data);
+      console.log("Disciplina criada com sucesso:", response.data);
       toast({
-        title: "Professor criado com sucesso!",
-        description: "O professor foi criado e adicionado ao sistema.",
+        title: "Disciplina criada com sucesso!",
+        description: "A disciplina foi criada e adicionada ao sistema.",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -70,10 +68,10 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
       resetForm();
       onClose();
     } catch (error) {
-      console.error("Ocorreu um erro ao criar o professor:", error);
+      console.error("Ocorreu um erro ao criar a disciplina:", error);
       toast({
-        title: "Erro ao criar professor",
-        description: "Houve um problema ao tentar criar o professor.",
+        title: "Erro ao criar disciplina",
+        description: "Houve um problema ao tentar criar a disciplina.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -92,28 +90,13 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Adicionar Professor</ModalHeader>
+        <ModalHeader>Adicionar Disciplina</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
             name="name"
             placeholder="Nome"
             value={formData.name}
-            onChange={handleInputChange}
-            marginTop="20px"
-          />
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleInputChange}
-            marginTop="20px"
-          />
-          <Input
-            name="employee_id"
-            placeholder="ID do Funcionário"
-            value={formData.employee_id}
             onChange={handleInputChange}
             marginTop="20px"
           />
@@ -135,4 +118,4 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
   );
 };
 
-export default ModalCreateTeacher;
+export default ModalCreateDiscipline;

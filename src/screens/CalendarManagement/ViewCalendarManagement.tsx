@@ -11,16 +11,17 @@ import {
   InfoList,
   InfoTitle,
 } from "./styles";
-import { IViewCalendar } from "./types";
+import { IViewCalendarManagement } from "./types";
 import Image from "next/image";
 
 import catolica from "../../../public/catholic.png";
 
-export const ViewCalendar = ({
+export const ViewCalendarManagement: React.FC<IViewCalendarManagement> = ({
   handleLiberate,
   handleRemove,
   handleAddHoliday,
-}: IViewCalendar) => {
+  handlePickDate,
+}) => {
   return (
     <Container>
       <InfoContainer>
@@ -62,7 +63,7 @@ export const ViewCalendar = ({
         <CalendarSubtitle>
           Escolha um dia para fazer alterações
         </CalendarSubtitle>
-        <DatePicker />
+        <DatePicker handlePickDate={handlePickDate} />
 
         <ButtonsContainer>
           <ActionButton onClick={handleLiberate}>Liberar</ActionButton>

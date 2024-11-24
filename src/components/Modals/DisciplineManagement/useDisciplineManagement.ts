@@ -1,37 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  Spinner,
-  Flex,
-  Input,
-  useToast,
-} from "@chakra-ui/react";
+import { TDiscipline, IUseDisciplineManagement } from "./types";
+import { useToast } from "@chakra-ui/react";
 
-interface Discipline {
-  id: number;
-  name: string;
-}
-
-interface DisciplineDetailsProps {
-  disciplineId: number | null;
-  onClose: () => void;
-  onDisciplineUpdated: () => void; // Callback to refresh the list
-}
-
-const DisciplineDetails: React.FC<DisciplineDetailsProps> = ({
+export const useDisciplineManagement = ({
   disciplineId,
   onClose,
   onDisciplineUpdated,
-}) => {
-  const [discipline, setDiscipline] = useState<Discipline | null>(null);
+}: IUseDisciplineManagement) => {
+  const [discipline, setDiscipline] = useState<TDiscipline | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const toast = useToast();
 
@@ -160,47 +137,13 @@ const DisciplineDetails: React.FC<DisciplineDetailsProps> = ({
     }));
   };
 
-  return (
-    <Modal isOpen={!!disciplineId} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Detalhes da Disciplina</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          {loading ? (
-            <Flex justify="center" align="center" height="60px">
-              <Spinner size="xl" color="green.500" />
-            </Flex>
-          ) : discipline ? (
-            <div>
-              <p>
-                <strong>Nome:</strong>{" "}
-                <Input
-                  name="name"
-                  value={discipline.name}
-                  onChange={handleChange}
-                  marginTop="20px"
-                />
-              </p>
-            </div>
-          ) : (
-            <p>Erro ao carregar</p>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="yellow" mr={3} onClick={onClose}>
-            Fechar
-          </Button>
-          <Button colorScheme="red" mr={3} onClick={handleDelete}>
-            Excluir
-          </Button>
-          <Button colorScheme="green" mr={3} onClick={handleSave}>
-            Salvar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
+  return {
+    disciplineId,
+    onClose,
+    loading,
+    discipline,
+    handleDelete,
+    handleSave,
+    handleChange,
+  };
 };
-
-export default DisciplineDetails;

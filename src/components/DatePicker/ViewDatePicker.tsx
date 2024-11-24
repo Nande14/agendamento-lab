@@ -18,15 +18,14 @@ import {
 import { IViewDatePicker } from "./types";
 import { getDaysWithNulls } from "@/utils";
 
-export const ViewDatePicker = ({
+export const ViewDatePicker: React.FC<IViewDatePicker> = ({
   prevMonth,
   nextMonth,
   currentMonth,
   currentYear,
-  //selectedDate,
   handleSelectDate,
   handleChooseDayStyle,
-}: IViewDatePicker) => {
+}) => {
   return (
     <PickerContainer>
       <PickerHeader>

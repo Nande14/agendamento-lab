@@ -14,17 +14,12 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import {
-  Container,
-  TitlePage,
-  Title,
-  ButtonWrapper,
-} from "../../screens/Teacher/style";
-import TeacherModal from "@/components/Modals/ModalTeacher";
-import ModalCreateTeacher from "@/components/Modals/ModalCreateTeacher";
+import { Container, TitlePage, Title, ButtonWrapper } from "./style";
+import TeacherModal from "@/components/Modals/ProfessorManagement";
+import ModalCreateTeacher from "@/components/Modals/ProfessorCreation";
 import { IViewTeacher } from "./types";
 
-export const ViewTeacher = ({
+export const ViewProfessorManagement = ({
   handleOpenCreateModal,
   loading,
   teachers,
