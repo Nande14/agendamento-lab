@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Container, TitlePage, Title, ButtonWrapper, Main } from "./style";
 import ModalCreateDiscipline from "@/components/Modals/DisciplineCreation";
-import { ConsumptionDisciplineModal } from "@/components/Modals/DisciplineManagement";
+import { DisciplineManagementModal } from "@/components/Modals/DisciplineManagement";
 import { IViewDicipline } from "./types";
 
 export const ViewDiscipline = ({
@@ -91,7 +91,7 @@ export const ViewDiscipline = ({
             isOpen={isModalCreateOpen}
             onClose={handleCloseModalCreate}
           />
-          <ConsumptionDisciplineModal
+          <DisciplineManagementModal
             disciplineId={selectedDisciplineId}
             onClose={handleCloseDisciplineDetails}
             onDisciplineUpdated={fetchSubjects}
