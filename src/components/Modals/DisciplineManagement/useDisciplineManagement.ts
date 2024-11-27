@@ -6,7 +6,6 @@ import { useToast } from "@chakra-ui/react";
 export const useDisciplineManagement = ({
   disciplineId,
   onClose,
-  onDisciplineUpdated,
 }: IUseDisciplineManagement) => {
   const [discipline, setDiscipline] = useState<TDiscipline | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -65,7 +64,6 @@ export const useDisciplineManagement = ({
       setLoading(false);
 
       onClose();
-      onDisciplineUpdated();
       toast({
         title: "Disciplina salva com sucesso!",
         status: "success",
@@ -108,7 +106,6 @@ export const useDisciplineManagement = ({
       setLoading(false);
 
       onClose();
-      onDisciplineUpdated();
       toast({
         title: "Disciplina excluída com sucesso!",
         status: "success",

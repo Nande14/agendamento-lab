@@ -5,12 +5,11 @@ export interface Subject {
 
 export interface IViewDicipline {
   handleOpenModalCreate: () => void;
-  loading: boolean;
-  subjects: Subject[];
+  isLoading: boolean;
+  subjects?: Subject[];
   handleDisciplineClick: (disciplineId: number) => void;
   isModalCreateOpen: boolean;
   handleCloseModalCreate: () => void;
   selectedDisciplineId: number | null;
   handleCloseDisciplineDetails: () => void;
-  fetchSubjects: () => void;
 }

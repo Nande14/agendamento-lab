@@ -1,44 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import { Subject } from "./types";
+import { useFetch } from "@/hooks/useFetch";
+import { appointmentApi } from "@/services";
 
 export const useDiscipline = () => {
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [loading, setLoading] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [selectedDisciplineId, setSelectedDisciplineId] = useState<
     number | null
   >(null);
-  const router = useRouter();
 
-  const fetchSubjects = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("Token not found");
-      }
-
-      const response = await axios.get(
-        "https://agendamentoback-h2i55nsa.b4a.run/discipline/get-all-disciplines",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setSubjects(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar disciplinas:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSubjects();
-  }, []);
+  const {
+    data: subjects,
+    mutate,
+    isLoading,
+  } = useFetch<Subject[]>(
+    "discipline/get-all-disciplines",
+    {},
+    true,
+    appointmentApi
+  );
 
   const handleOpenModalCreate = () => {
     setIsModalCreateOpen(true);
@@ -46,7 +26,7 @@ export const useDiscipline = () => {
 
   const handleCloseModalCreate = () => {
     setIsModalCreateOpen(false);
-    fetchSubjects();
+    mutate();
   };
 
   const handleDisciplineClick = (disciplineId: number) => {
@@ -55,18 +35,17 @@ export const useDiscipline = () => {
 
   const handleCloseDisciplineDetails = () => {
     setSelectedDisciplineId(null);
-    fetchSubjects();
+    mutate();
   };
 
   return {
     handleOpenModalCreate,
-    loading,
+    isLoading,
     subjects,
     handleDisciplineClick,
     isModalCreateOpen,
     handleCloseModalCreate,
     selectedDisciplineId,
     handleCloseDisciplineDetails,
-    fetchSubjects,
   };
 };

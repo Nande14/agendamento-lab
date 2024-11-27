@@ -6,7 +6,6 @@ export type TDiscipline = {
 export interface IDisciplineManagementModal {
   disciplineId: number | null;
   onClose: () => void;
-  onDisciplineUpdated: () => void;
 }
 
 export interface IUseDisciplineManagement

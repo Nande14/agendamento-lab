@@ -19,14 +19,13 @@ import { IViewDicipline } from "./types";
 
 export const ViewDiscipline = ({
   handleOpenModalCreate,
-  loading,
+  isLoading,
   subjects,
   handleDisciplineClick,
   isModalCreateOpen,
   handleCloseModalCreate,
   selectedDisciplineId,
   handleCloseDisciplineDetails,
-  fetchSubjects,
 }: IViewDicipline) => {
   return (
     <>
@@ -54,7 +53,7 @@ export const ViewDiscipline = ({
           </TitlePage>
 
           <TableContainer>
-            {loading ? (
+            {isLoading ? (
               <Flex justify="center" align="center" height="600px">
                 <Spinner
                   thickness="10px"
@@ -73,7 +72,7 @@ export const ViewDiscipline = ({
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {subjects.map((subject) => (
+                  {subjects?.map((subject) => (
                     <Tr
                       key={subject.id}
                       onClick={() => handleDisciplineClick(subject.id)}
@@ -94,7 +93,6 @@ export const ViewDiscipline = ({
           <DisciplineManagementModal
             disciplineId={selectedDisciplineId}
             onClose={handleCloseDisciplineDetails}
-            onDisciplineUpdated={fetchSubjects}
           />
         </Container>
       </Main>
