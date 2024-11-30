@@ -15,6 +15,7 @@ import {
   BlockedEyeIcon,
 } from "./styles";
 import { IViewLogin } from "./types";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const ViewLogin = ({
   setPassword,
@@ -24,6 +25,8 @@ export const ViewLogin = ({
   handleSubmit,
   handleChangePasswordInputType,
   passwordInputType,
+  handleVerifyRecaptcha,
+  isButtonDisabled,
 }: IViewLogin) => {
   return (
     <>
@@ -48,7 +51,6 @@ export const ViewLogin = ({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-
               <PasswordInputContainer>
                 <PasswordInput
                   type={passwordInputType}
@@ -64,9 +66,15 @@ export const ViewLogin = ({
                   )}
                 </EyeIconContainer>
               </PasswordInputContainer>
-
+              <ReCAPTCHA
+                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                onChange={handleVerifyRecaptcha}
+              />
+              ,
               <ButtonContainer>
-                <FormButton type="submit">Acessar</FormButton>
+                <FormButton type="submit" isDisabled={!isButtonDisabled}>
+                  Acessar
+                </FormButton>
               </ButtonContainer>
             </FormControl>
           </LoginForm>

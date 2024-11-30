@@ -2,7 +2,8 @@ import {
   BlockedEyeIcon as BlockedEye,
   UnBlockedEyeIcon as UnBlockedEye,
 } from "@/components/Icons";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { IFormButton } from "./types";
 
 export const Container = styled.div`
   display: flex;
@@ -97,7 +98,7 @@ export const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export const FormButton = styled.button`
+export const FormButton = styled.button<IFormButton>`
   width: 29rem;
   height: 3.5rem;
   border-radius: 10px;
@@ -116,6 +117,13 @@ export const FormButton = styled.button`
   &:active {
     background-color: #611f20;
   }
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      background-color: gray;
+      pointer-events: none;
+    `}
 `;
 
 export const BlockedEyeIcon = styled(BlockedEye)``;

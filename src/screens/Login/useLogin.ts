@@ -10,7 +10,11 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordInputType, setPasswordInputType] =
     useState<TPasswordType>("password");
+  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const toast = useToast();
+
+  const isButtonDisabled =
+    email.length > 0 && password.length > 0 && isRecaptchaVerified;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,6 +68,10 @@ export const useLogin = () => {
     }
   };
 
+  const handleVerifyRecaptcha = () => {
+    setIsRecaptchaVerified(true);
+  };
+
   return {
     isLoading,
     setPassword,
@@ -73,6 +81,8 @@ export const useLogin = () => {
     handleSubmit,
     passwordInputType,
     handleChangePasswordInputType,
+    handleVerifyRecaptcha,
+    isButtonDisabled,
   };
 };
 
