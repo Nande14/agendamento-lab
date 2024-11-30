@@ -67,11 +67,11 @@ export const ViewLogin = ({
                   )}
                 </EyeIconContainer>
               </PasswordInputContainer>
-              {/* <ReCAPTCHA
+              <ReCAPTCHA
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                 data-type="image"
                 onChange={handleVerifyRecaptcha}
-              /> */}
+              />
               <ButtonContainer>
                 <FormButton type="submit" isDisabled={!isButtonDisabled}>
                   Acessar
