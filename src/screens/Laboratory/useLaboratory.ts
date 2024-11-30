@@ -14,7 +14,7 @@ export const useLaboratory = () => {
     mutate,
     isLoading,
   } = useFetch<Laboratory[]>(
-    "laboratory/get-all-laboratorys",
+    "laboratory/get-all-laboratories",
     {},
     true,
     appointmentApi

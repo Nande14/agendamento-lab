@@ -96,7 +96,7 @@ export const useDisciplineManagement = ({
 
       setLoading(true);
       await axios.delete(
-        `https://agendamentoback-h2i55nsa.b4a.run/subject/${discipline.id}`,
+        `https://agendamentoback-h2i55nsa.b4a.run/discipline/${discipline.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
