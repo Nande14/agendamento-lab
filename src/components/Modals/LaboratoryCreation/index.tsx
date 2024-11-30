@@ -120,7 +120,7 @@ const ModalCreateLaboratory: React.FC<ModalCreateLaboratoryProps> = ({
             marginTop="20px"
           />
           <Input
-            name="observation"
+            name="observations"
             placeholder="Observações"
             value={formData.observations}
             onChange={handleInputChange}
