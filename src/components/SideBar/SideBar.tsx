@@ -23,6 +23,7 @@ export function SideBar() {
     { label: "Agendamento", path: "/" },
     { label: "Professores", path: "/professor" },
     { label: "Diciplinas", path: "/discipline" },
+    { label: "Laboratórios", path: "/laboratory" },
     { label: "Calendário", path: "/calendar" },
     { label: "Reservas", path: "/reservation" },
   ];
