@@ -13,8 +13,9 @@ export interface IViewLogin {
   passwordInputType: TPasswordType;
   handleVerifyRecaptcha: () => void;
   isButtonDisabled: boolean;
+  handleOauth: (event: any) => Promise<void>;
 }
 
 export interface IFormButton {
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }

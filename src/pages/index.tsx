@@ -24,16 +24,17 @@ import {
   FormControl,
   Select,
 } from "@chakra-ui/react";
+import { appointmentUrl } from "@/services";
 
 type TTeacher = {
   id: number;
   name: string;
-}
+};
 
 type TDiscipline = {
   id: number;
   name: string;
-}
+};
 
 interface Schedule {
   id: string;
@@ -215,9 +216,17 @@ const ScheduleManagement = () => {
   };
 
   useEffect(() => {
-    fetchTeachers();
-    fetchSubjects();
-    fetchSchedules();
+    const urlParam = new URLSearchParams(window.location.search);
+
+    const googleToken = urlParam.get("token");
+
+    if (googleToken) {
+      localStorage.setItem("token", googleToken);
+      window.location.href = "https://https://agendamento-lab-chi.vercel.app";
+      fetchTeachers();
+      fetchSubjects();
+      fetchSchedules();
+    }
   }, []);
 
   return (

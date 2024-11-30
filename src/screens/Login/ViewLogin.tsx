@@ -27,6 +27,7 @@ export const ViewLogin = ({
   passwordInputType,
   handleVerifyRecaptcha,
   isButtonDisabled,
+  handleOauth,
 }: IViewLogin) => {
   return (
     <>
@@ -71,11 +72,11 @@ export const ViewLogin = ({
                 data-type="image"
                 onChange={handleVerifyRecaptcha}
               />
-              ,
               <ButtonContainer>
                 <FormButton type="submit" isDisabled={!isButtonDisabled}>
                   Acessar
                 </FormButton>
+                <FormButton onClick={handleOauth}>Login social</FormButton>
               </ButtonContainer>
             </FormControl>
           </LoginForm>

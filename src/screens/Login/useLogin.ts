@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
 import { TPasswordType } from "./types";
+import { redirect } from "next/navigation";
+import { appointmentApi, appointmentUrl } from "@/services";
 
 export const useLogin = () => {
   const router = useRouter();
@@ -60,6 +62,11 @@ export const useLogin = () => {
     }
   };
 
+  const handleOauth = async (event: any) => {
+    event.preventDefault();
+    window.location.href = `${appointmentUrl}/user/google/login`;
+  };
+
   const handleChangePasswordInputType = () => {
     if (passwordInputType === "password") {
       setPasswordInputType("text");
@@ -83,7 +90,6 @@ export const useLogin = () => {
     handleChangePasswordInputType,
     handleVerifyRecaptcha,
     isButtonDisabled,
+    handleOauth,
   };
 };
-
-// Erro ao fazer login. Por favor, tente novamente mais tarde.

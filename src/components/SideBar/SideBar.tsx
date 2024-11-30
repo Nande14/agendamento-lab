@@ -29,7 +29,7 @@ export function SideBar() {
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem("accessToken");
+      localStorage.removeItem("token");
       localStorage.removeItem("expiration");
       localStorage.removeItem("permission");
       navigation.push("/login");
