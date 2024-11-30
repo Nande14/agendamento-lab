@@ -42,7 +42,7 @@ export const ViewLogin = ({
           
         </ImageContainer> */}
         <LoginContainer>
-          <LoginTitle>Login {process.env.VAR_TESTE} </LoginTitle>
+          <LoginTitle>Login</LoginTitle>
           <LoginForm onSubmit={handleSubmit}>
             <FormControl>
               <EmailInput
