@@ -26,12 +26,12 @@ export const useReservation = () => {
     const filtered = schedules
       ?.filter((schedule) => formatDate(schedule.start_time) === selectedDate)
       ?.map((schedule) => ({
-        name: schedule?.teacher?.name || "Mockado", // Nome fixo até correção de retorno de professor e class
+        name: schedule?.teacher?.name || "", // Nome fixo até correção de retorno de professor e class
         date: formatDate(schedule?.start_time),
         hour: `${formatTime(schedule?.start_time)} - ${formatTime(
           schedule?.end_time
         )}`,
-        class: schedule?.class || "Mockado", // dado mockado
+        laboratory: schedule?.laboratory || "", // dado mockado
         description: schedule?.description,
       }));
 

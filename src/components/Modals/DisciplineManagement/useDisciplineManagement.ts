@@ -21,7 +21,7 @@ export const useDisciplineManagement = ({
 
         setLoading(true);
         const response = await axios.get(
-          `https://marcacao-sala.onrender.com/subject/${disciplineId}`,
+          `https://agendamentoback-h2i55nsa.b4a.run/discipline/${disciplineId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ export const useDisciplineManagement = ({
 
       setLoading(true);
       await axios.put(
-        `https://marcacao-sala.onrender.com/subject/${discipline.id}`,
+        `https://agendamentoback-h2i55nsa.b4a.run/discipline/${discipline.id}`,
         discipline,
         {
           headers: {
@@ -96,7 +96,7 @@ export const useDisciplineManagement = ({
 
       setLoading(true);
       await axios.delete(
-        `https://marcacao-sala.onrender.com/subject/${discipline.id}`,
+        `https://agendamentoback-h2i55nsa.b4a.run/subject/${discipline.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

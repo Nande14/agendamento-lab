@@ -36,10 +36,19 @@ type TDiscipline = {
   name: string;
 };
 
+type TLaboratory = {
+  id: number;
+  name: string;
+  machineQuantity: string;
+  softwares: string;
+  observation: string;
+};
+
 interface Schedule {
   id: string;
   teacher: TTeacher;
   discipline: TDiscipline;
+  laboratory: TLaboratory;
   start_time: string;
   end_time: string;
 }
@@ -61,11 +70,13 @@ const ScheduleManagement = () => {
   const [formData, setFormData] = useState({
     teacher_id: "",
     subject_id: "",
+    laboratoryId: "",
     start_time: "",
     end_time: "",
   });
   const [teachers, setTeachers] = useState<TTeacher[]>([]);
   const [subjects, setSubjects] = useState<TDiscipline[]>([]);
+  const [laboratories, setLaboratories] = useState<TLaboratory[]>([]);
 
   const fetchTeachers = async () => {
     try {
@@ -133,6 +144,27 @@ const ScheduleManagement = () => {
     }
   };
 
+  const fetchLaboratories = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("Token de autorização não encontrado.");
+        return;
+      }
+      const response = await axios.get<TLaboratory[]>(
+        "https://agendamentoback-h2i55nsa.b4a.run/laboratory/get-all-laboratories",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setLaboratories(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar laboratórios:", error);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -183,6 +215,7 @@ const ScheduleManagement = () => {
         setFormData({
           teacher_id: "",
           subject_id: "",
+          laboratoryId: "",
           start_time: "",
           end_time: "",
         });
@@ -230,6 +263,7 @@ const ScheduleManagement = () => {
     fetchTeachers();
     fetchSubjects();
     fetchSchedules();
+    fetchLaboratories();
   }, []);
 
   return (
@@ -279,6 +313,21 @@ const ScheduleManagement = () => {
                   </Select>
                 </FormControl>
                 <FormControl>
+                  <Select
+                    name="laboratoryId"
+                    placeholder="Selecione o Laboratório"
+                    value={formData.laboratoryId}
+                    onChange={handleChange}
+                    required
+                  >
+                    {laboratories.map((laboratory) => (
+                      <option key={laboratory.id} value={laboratory.id}>
+                        {laboratory.name}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl>
                   <Input
                     type="datetime-local"
                     name="start_time"
@@ -313,6 +362,7 @@ const ScheduleManagement = () => {
                     <Tr>
                       <Th>Professor</Th>
                       <Th>Disciplina</Th>
+                      <Th>Laboratório</Th>
                       <Th>Hora de Início</Th>
                       <Th>Hora de Término</Th>
                       <Th>Ações</Th>
@@ -323,6 +373,7 @@ const ScheduleManagement = () => {
                       <Tr key={schedule.id}>
                         <Td>{schedule?.teacher?.name}</Td>
                         <Td>{schedule?.discipline?.name}</Td>
+                        <Td>{schedule?.laboratory?.name}</Td>
                         <Td>{formatDateTime(schedule.start_time)}</Td>
                         <Td>{formatDateTime(schedule.end_time)}</Td>
                         <Td>

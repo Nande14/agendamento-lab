@@ -50,7 +50,7 @@ export const ViewReservation: React.FC<IViewReservation> = ({
                 <Td>{schedule?.name}</Td>
                 <Td>{schedule?.date}</Td>
                 <Td>{schedule?.hour}</Td>
-                <Td>{schedule?.class}</Td>
+                <Td>{schedule?.laboratory}</Td>
                 <Td>{schedule?.description}</Td>
               </Tr>
             ))}

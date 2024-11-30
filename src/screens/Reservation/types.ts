@@ -14,7 +14,7 @@ export interface ISchedule {
   discipline: TDiscipline;
   start_time: string;
   end_time: string;
-  class: string;
+  laboratory: string;
   description: string;
 }
 
@@ -22,7 +22,7 @@ export interface TFilteredAndFormattedSchedule {
   name: string;
   date: string;
   hour: string;
-  class: string;
+  laboratory: string;
   description: string;
 }
 
