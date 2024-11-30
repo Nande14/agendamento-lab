@@ -67,7 +67,8 @@ export const ViewLogin = ({
                 </EyeIconContainer>
               </PasswordInputContainer>
               <ReCAPTCHA
-                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                sitekey={process.env.RECAPTCHA_SITE_KEY as string}
+                data-type="image"
                 onChange={handleVerifyRecaptcha}
               />
               ,
