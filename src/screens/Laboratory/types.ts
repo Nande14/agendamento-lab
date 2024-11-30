@@ -3,7 +3,7 @@ export interface Laboratory {
   name: string;
   machineQuantity: string;
   softwares: string;
-  observation: string;
+  observations: string;
 }
 
 export interface IViewLaboratory {

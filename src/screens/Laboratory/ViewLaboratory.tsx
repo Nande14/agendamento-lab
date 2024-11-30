@@ -69,9 +69,9 @@ export const ViewLaboratory = ({
                 <Thead>
                   <Tr>
                     <Th>Nome</Th>
-                    <Th>Nome</Th>
-                    <Th>Nome</Th>
-                    <Th>Nome</Th>
+                    <Th>Quantidade de máquinas</Th>
+                    <Th>Sofwares</Th>
+                    <Th>Observações</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -85,7 +85,7 @@ export const ViewLaboratory = ({
                       <Td>{laboratory.name}</Td>
                       <Td>{laboratory.machineQuantity}</Td>
                       <Td>{laboratory.softwares}</Td>
-                      <Td>{laboratory.observation}</Td>
+                      <Td>{laboratory.observations}</Td>
                     </Tr>
                   ))}
                 </Tbody>

@@ -32,7 +32,7 @@ export const useLaboratoryManagement = ({
         setLoading(false);
       } catch (error) {
         console.error(
-          "Ocorreu um erro ao buscar detalhes da disciplina:",
+          "Ocorreu um erro ao buscar detalhes do laboratório:",
           error
         );
         setLoading(false);
@@ -65,21 +65,21 @@ export const useLaboratoryManagement = ({
 
       onClose();
       toast({
-        title: "Disciplina salva com sucesso!",
+        title: "Laboratório salva com sucesso!",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
     } catch (error) {
       console.error(
-        "Ocorreu um erro ao salvar as alterações da disciplina:",
+        "Ocorreu um erro ao salvar as alterações da laboratório:",
         error
       );
       setLoading(false);
       toast({
-        title: "Erro ao salvar disciplina!",
+        title: "Erro ao salvar laboratório!",
         description:
-          "Ocorreu um erro ao salvar as alterações da disciplina. Por favor, tente novamente mais tarde.",
+          "Ocorreu um erro ao salvar as alterações do laboratório. Por favor, tente novamente mais tarde.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -107,7 +107,7 @@ export const useLaboratoryManagement = ({
 
       onClose();
       toast({
-        title: "Disciplina excluída com sucesso!",
+        title: "Laboratório excluída com sucesso!",
         status: "success",
         duration: 5000,
         isClosable: true,

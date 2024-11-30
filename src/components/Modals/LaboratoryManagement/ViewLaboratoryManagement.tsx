@@ -32,7 +32,7 @@ export const ViewLaboratoryManagement: React.FC<IViewLaboratoryManagement> = ({
     <Modal isOpen={!!laboratoryId} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Detalhes da Disciplina</ModalHeader>
+        <ModalHeader>Detalhes do Laboratório</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {loading ? (
@@ -40,17 +40,54 @@ export const ViewLaboratoryManagement: React.FC<IViewLaboratoryManagement> = ({
               <Spinner size="xl" color="green.500" />
             </Flex>
           ) : laboratory ? (
-            <LaboratoryNameContainer>
-              <LaboratoryNameField>
-                <LaboratoryLabelText>Nome:</LaboratoryLabelText>{" "}
-                <Input
-                  name="name"
-                  value={laboratory.name}
-                  onChange={handleChange}
-                  marginTop="20px"
-                />
-              </LaboratoryNameField>
-            </LaboratoryNameContainer>
+            <>
+              <LaboratoryNameContainer>
+                <LaboratoryNameField>
+                  <LaboratoryLabelText>Nome:</LaboratoryLabelText>{" "}
+                  <Input
+                    name="name"
+                    value={laboratory.name}
+                    onChange={handleChange}
+                    marginTop="20px"
+                  />
+                </LaboratoryNameField>
+              </LaboratoryNameContainer>
+              <LaboratoryNameContainer>
+                <LaboratoryNameField>
+                  <LaboratoryLabelText>
+                    Quantidade de máquinas:
+                  </LaboratoryLabelText>{" "}
+                  <Input
+                    name="name"
+                    value={laboratory.machineQuantity}
+                    onChange={handleChange}
+                    marginTop="20px"
+                  />
+                </LaboratoryNameField>
+              </LaboratoryNameContainer>
+              <LaboratoryNameContainer>
+                <LaboratoryNameField>
+                  <LaboratoryLabelText>Softwares:</LaboratoryLabelText>{" "}
+                  <Input
+                    name="name"
+                    value={laboratory.softwares}
+                    onChange={handleChange}
+                    marginTop="20px"
+                  />
+                </LaboratoryNameField>
+              </LaboratoryNameContainer>
+              <LaboratoryNameContainer>
+                <LaboratoryNameField>
+                  <LaboratoryLabelText>Observações:</LaboratoryLabelText>{" "}
+                  <Input
+                    name="name"
+                    value={laboratory.observations}
+                    onChange={handleChange}
+                    marginTop="20px"
+                  />
+                </LaboratoryNameField>
+              </LaboratoryNameContainer>
+            </>
           ) : (
             <LaboratoryNameFieldErrorText>
               Erro ao carregar

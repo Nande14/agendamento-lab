@@ -27,7 +27,7 @@ const ModalCreateLaboratory: React.FC<ModalCreateLaboratoryProps> = ({
     name: "",
     machineQuantity: "",
     softwares: "",
-    observation: "",
+    observations: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);

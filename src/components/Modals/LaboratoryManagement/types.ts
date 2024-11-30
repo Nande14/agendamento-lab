@@ -1,6 +1,9 @@
 export type TLaboratory = {
   id: number;
   name: string;
+  machineQuantity: string;
+  softwares: string;
+  observations: string;
 };
 
 export interface ILaboratoryManagementModal {
