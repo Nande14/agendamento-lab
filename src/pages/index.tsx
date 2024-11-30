@@ -222,7 +222,7 @@ const ScheduleManagement = () => {
 
     if (googleToken) {
       localStorage.setItem("token", googleToken);
-      window.location.href = "https://https://agendamento-lab-chi.vercel.app";
+      window.location.href = "https://agendamento-lab-chi.vercel.app";
       fetchTeachers();
       fetchSubjects();
       fetchSchedules();
