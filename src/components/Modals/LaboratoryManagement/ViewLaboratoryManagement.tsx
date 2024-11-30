@@ -58,7 +58,7 @@ export const ViewLaboratoryManagement: React.FC<IViewLaboratoryManagement> = ({
                     Quantidade de máquinas:
                   </LaboratoryLabelText>{" "}
                   <Input
-                    name="name"
+                    name="machineQuantity"
                     value={laboratory.machineQuantity}
                     onChange={handleChange}
                     marginTop="20px"
@@ -69,7 +69,7 @@ export const ViewLaboratoryManagement: React.FC<IViewLaboratoryManagement> = ({
                 <LaboratoryNameField>
                   <LaboratoryLabelText>Softwares:</LaboratoryLabelText>{" "}
                   <Input
-                    name="name"
+                    name="softwares"
                     value={laboratory.softwares}
                     onChange={handleChange}
                     marginTop="20px"
@@ -80,7 +80,7 @@ export const ViewLaboratoryManagement: React.FC<IViewLaboratoryManagement> = ({
                 <LaboratoryNameField>
                   <LaboratoryLabelText>Observações:</LaboratoryLabelText>{" "}
                   <Input
-                    name="name"
+                    name="observations"
                     value={laboratory.observations}
                     onChange={handleChange}
                     marginTop="20px"
