@@ -223,10 +223,13 @@ const ScheduleManagement = () => {
     if (googleToken) {
       localStorage.setItem("token", googleToken);
       window.location.href = "https://agendamento-lab-chi.vercel.app";
-      fetchTeachers();
-      fetchSubjects();
-      fetchSchedules();
     }
+  }, []);
+
+  useEffect(() => {
+    fetchTeachers();
+    fetchSubjects();
+    fetchSchedules();
   }, []);
 
   return (
