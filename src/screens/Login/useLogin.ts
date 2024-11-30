@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useToast } from "@chakra-ui/react";
+import { TPasswordType } from "./types";
 
 export const useLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordInputType, setPasswordInputType] =
+    useState<TPasswordType>("password");
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,25 +31,49 @@ export const useLogin = () => {
         const data = await response.json();
         const { access_token } = data;
         localStorage.setItem("token", access_token);
-
         router.push("/");
       } else {
-        setError("Erro ao fazer login. Verifique suas credenciais.");
+        toast({
+          title: "Erro ao fazer login",
+          description: "Verifique suas credenciais",
+          status: "error",
+          duration: 5000,
+          position: "top-right",
+        });
       }
     } catch (error) {
-      setError("Erro ao fazer login. Por favor, tente novamente mais tarde.");
+      console.log(error);
+
+      toast({
+        title: "Disciplina criada com sucesso!",
+        description: "",
+        status: "error",
+        duration: 5000,
+        position: "top-right",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleChangePasswordInputType = () => {
+    if (passwordInputType === "password") {
+      setPasswordInputType("text");
+    } else {
+      setPasswordInputType("password");
+    }
+  };
+
   return {
     isLoading,
-    error,
     setPassword,
     password,
     setEmail,
     email,
     handleSubmit,
+    passwordInputType,
+    handleChangePasswordInputType,
   };
 };
+
+// Erro ao fazer login. Por favor, tente novamente mais tarde.

@@ -1,6 +1,6 @@
 export interface defaultIconProps {
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   primaryColor?: string;
   secondaryColor?: string;
   tertiaryColor?: string;

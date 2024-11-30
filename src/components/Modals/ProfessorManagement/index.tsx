@@ -27,7 +27,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
   onClose,
 }) => {
   const [teacher, setTeacher] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
 
   useEffect(() => {

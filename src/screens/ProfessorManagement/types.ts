@@ -1,4 +1,4 @@
-export interface ITeacher {
+export interface IProfessor {
   id: number;
   name: string;
   employee_id: string;
@@ -7,8 +7,8 @@ export interface ITeacher {
 
 export interface IViewTeacher {
   handleOpenCreateModal: () => void;
-  loading: boolean;
-  teachers: ITeacher[];
+  isLoading: boolean;
+  professors?: IProfessor[];
   handleTeacherClick: (teacherId: number) => void;
   isModalOpen: boolean;
   selectedTeacherId: number | null;

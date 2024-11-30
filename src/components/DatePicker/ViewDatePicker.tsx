@@ -16,11 +16,11 @@ import {
   SevenColGrid,
 } from "./styles";
 import { IViewDatePicker } from "./types";
-import { getDaysWithNulls } from "@/utils";
+import { getDaysWithNulls } from "./helps";
 
 export const ViewDatePicker: React.FC<IViewDatePicker> = ({
-  prevMonth,
   nextMonth,
+  previousMonth,
   currentMonth,
   currentYear,
   handleSelectDate,
@@ -29,7 +29,7 @@ export const ViewDatePicker: React.FC<IViewDatePicker> = ({
   return (
     <PickerContainer>
       <PickerHeader>
-        <ButtonBackMonth onClick={prevMonth}>
+        <ButtonBackMonth onClick={previousMonth}>
           <LeftArrowIcon />
         </ButtonBackMonth>
 

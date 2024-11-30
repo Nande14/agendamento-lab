@@ -6,7 +6,11 @@ export type TDayStyleReturn = {
   borderColor: string;
 };
 
-export type TAvailabilityStatus = "available" | "checked" | "removed" | "holiday";
+export type TAvailabilityStatus =
+  | "available"
+  | "checked"
+  | "removed"
+  | "holiday";
 
 export interface IDatePicker {
   handlePickDate: (date: string) => void;
@@ -14,9 +18,14 @@ export interface IDatePicker {
 
 export interface IUseDatePicker extends IDatePicker {}
 
+export interface IMonthDaysAvailability {
+  date: string;
+  status: TAvailabilityStatus;
+}
+
 export interface IViewDatePicker {
-  prevMonth: () => void;
   nextMonth: () => void;
+  previousMonth: () => void;
   currentMonth: number;
   currentYear: number;
   handleSelectDate: (event: MouseEvent<HTMLButtonElement>) => void;

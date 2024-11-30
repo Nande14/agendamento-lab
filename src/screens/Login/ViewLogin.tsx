@@ -1,16 +1,29 @@
 import Head from "next/head";
-import { Button, FormControl, Input } from "@chakra-ui/react";
-import { Container, LoginContainer, ButtonContainer } from "./styles";
+import { FormControl } from "@chakra-ui/react";
+import {
+  Container,
+  LoginContainer,
+  ButtonContainer,
+  LoginTitle,
+  FormButton,
+  LoginForm,
+  EmailInput,
+  PasswordInputContainer,
+  PasswordInput,
+  EyeIconContainer,
+  UnBlockedEyeIcon,
+  BlockedEyeIcon,
+} from "./styles";
 import { IViewLogin } from "./types";
 
 export const ViewLogin = ({
-  isLoading,
-  error,
   setPassword,
   password,
   setEmail,
   email,
   handleSubmit,
+  handleChangePasswordInputType,
+  passwordInputType,
 }: IViewLogin) => {
   return (
     <>
@@ -22,38 +35,41 @@ export const ViewLogin = ({
       </Head>
 
       <Container>
+        {/* <ImageContainer>
+          
+        </ImageContainer> */}
         <LoginContainer>
-          <h1>Bem-vindo ao agendamento do laboratório B 208</h1>
-          <form onSubmit={handleSubmit}>
+          <LoginTitle>Login</LoginTitle>
+          <LoginForm onSubmit={handleSubmit}>
             <FormControl>
-              <Input
+              <EmailInput
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                marginBottom="20px"
               />
-              <Input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {error && <p>{error}</p>}
+
+              <PasswordInputContainer>
+                <PasswordInput
+                  type={passwordInputType}
+                  placeholder="Senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <EyeIconContainer onClick={handleChangePasswordInputType}>
+                  {passwordInputType === "password" ? (
+                    <BlockedEyeIcon />
+                  ) : (
+                    <UnBlockedEyeIcon />
+                  )}
+                </EyeIconContainer>
+              </PasswordInputContainer>
+
               <ButtonContainer>
-                <Button
-                  mt={4}
-                  bg="#006a12"
-                  _hover={{ bg: "green.500" }}
-                  color="white"
-                  type="submit"
-                  isLoading={isLoading}
-                >
-                  Entrar
-                </Button>
+                <FormButton type="submit">Acessar</FormButton>
               </ButtonContainer>
             </FormControl>
-          </form>
+          </LoginForm>
         </LoginContainer>
       </Container>
     </>

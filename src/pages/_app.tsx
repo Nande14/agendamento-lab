@@ -14,7 +14,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const [showLayout, setShowLayout] = useState<boolean>(false);
   const { asPath } = useRouter();
 
-  //Route Events.
   Router.events.on("routeChangeStart", () => NProgress.start());
   Router.events.on("routeChangeComplete", () => NProgress.done());
   Router.events.on("routeChangeError", () => NProgress.done());

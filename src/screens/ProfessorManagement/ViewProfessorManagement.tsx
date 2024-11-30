@@ -4,7 +4,6 @@ import {
   Button,
   Spinner,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -14,15 +13,15 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import { Container, TitlePage, Title, ButtonWrapper } from "./style";
+import { Container, TitlePage, ButtonWrapper } from "./style";
 import TeacherModal from "@/components/Modals/ProfessorManagement";
 import ModalCreateTeacher from "@/components/Modals/ProfessorCreation";
 import { IViewTeacher } from "./types";
 
 export const ViewProfessorManagement = ({
   handleOpenCreateModal,
-  loading,
-  teachers,
+  isLoading,
+  professors,
   handleTeacherClick,
   isModalOpen,
   selectedTeacherId,
@@ -56,7 +55,7 @@ export const ViewProfessorManagement = ({
           </TitlePage>
 
           <TableContainer>
-            {loading ? (
+            {isLoading ? (
               <Flex justify="center" align="center" height="600px">
                 <Spinner
                   thickness="10px"
@@ -77,16 +76,16 @@ export const ViewProfessorManagement = ({
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {teachers.map((teacher) => (
+                  {professors?.map((professor) => (
                     <Tr
-                      key={teacher.id}
-                      onClick={() => handleTeacherClick(teacher.id)}
+                      key={professor?.id}
+                      onClick={() => handleTeacherClick(professor?.id)}
                       style={{ cursor: "pointer" }}
                       _hover={{ bg: "green.100", boxShadow: "md" }}
                     >
-                      <Td>{teacher.name}</Td>
-                      <Td>{teacher.email}</Td>
-                      <Td>{teacher.employee_id}</Td>
+                      <Td>{professor?.name}</Td>
+                      <Td>{professor?.email}</Td>
+                      <Td>{professor?.employee_id}</Td>
                     </Tr>
                   ))}
                 </Tbody>

@@ -1,44 +1,25 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { ITeacher } from "./types";
+import { useState } from "react";
+import { IProfessor } from "./types";
+import { useFetch } from "@/hooks/useFetch";
+import { appointmentApi } from "@/services";
 
 export const useProfessorManagement = () => {
-  const [teachers, setTeachers] = useState<ITeacher[]>([]);
-  const [loading, setLoading] = useState(false);
   const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const router = useRouter();
 
-  useEffect(() => {
-    const fetchTeachers = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            "https://agendamentoback-h2i55nsa.b4a.run/professor/get-all-professors",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setTeachers(response.data);
-        } catch (error) {
-          console.error("Erro ao buscar professores:", error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        router.push("/login");
-      }
-    };
-    fetchTeachers();
-  }, [router]);
+  const {
+    data: professors,
+    mutate,
+    isLoading,
+  } = useFetch<IProfessor[]>(
+    "professor/get-all-professors",
+    {},
+    true,
+    appointmentApi
+  );
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -46,6 +27,7 @@ export const useProfessorManagement = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    mutate();
   };
 
   const handleTeacherClick = (teacherId: number) => {
@@ -59,12 +41,13 @@ export const useProfessorManagement = () => {
 
   const handleCloseCreateModal = () => {
     setIsCreateModalOpen(false);
+    mutate();
   };
 
   return {
     handleOpenCreateModal,
-    loading,
-    teachers,
+    isLoading,
+    professors,
     handleTeacherClick,
     isModalOpen,
     selectedTeacherId,
