@@ -1,5 +1,6 @@
 import {
   BlockedEyeIcon as BlockedEye,
+  GoogleIcon as Google,
   UnBlockedEyeIcon as UnBlockedEye,
 } from "@/components/Icons";
 import styled, { css } from "styled-components";
@@ -92,13 +93,22 @@ export const EyeIconContainer = styled.section`
 
 export const ButtonContainer = styled.div`
   width: 29rem;
-  height: 3.5rem;
+  height: 7.5;
 
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   justify-content: center;
+  align-items: center;
 `;
 
-export const FormButton = styled.button<IFormButton>`
+export const LoginOptionText = styled.p`
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+`;
+
+export const LoginButton = styled.button<IFormButton>`
   width: 29rem;
   height: 3.5rem;
   border-radius: 10px;
@@ -126,6 +136,37 @@ export const FormButton = styled.button<IFormButton>`
     `}
 `;
 
+export const GoogleLoginButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 29rem;
+  height: 3.5rem;
+  border-radius: 10px;
+  background-color: #fff;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  &:active {
+    background-color: #e0e0e0;
+  }
+`;
+
+export const GoogleLoginText = styled.p`
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+`;
+
 export const BlockedEyeIcon = styled(BlockedEye)``;
 
 export const UnBlockedEyeIcon = styled(UnBlockedEye)``;
+
+export const GoogleIcon = styled(Google).attrs({ width: 26, height: 26 })``;

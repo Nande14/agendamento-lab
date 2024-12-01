@@ -20,18 +20,20 @@ export const useReservation = () => {
     appointmentApi
   );
 
+  console.log({ schedules });
+
   const filterByDate = () => {
     if (!selectedDate) return;
 
     const filtered = schedules
-      ?.filter((schedule) => formatDate(schedule.start_time) === selectedDate)
+      ?.filter((schedule) => formatDate(schedule?.start_time) === selectedDate)
       ?.map((schedule) => ({
-        name: schedule?.teacher?.name || "", // Nome fixo até correção de retorno de professor e class
+        name: schedule?.professor?.name,
         date: formatDate(schedule?.start_time),
         hour: `${formatTime(schedule?.start_time)} - ${formatTime(
           schedule?.end_time
         )}`,
-        laboratory: schedule?.laboratory || "", // dado mockado
+        laboratory: schedule?.laboratory?.name,
         description: schedule?.description,
       }));
 

@@ -26,7 +26,7 @@ export const ViewReservation: React.FC<IViewReservation> = ({
           width={1000}
           height={1000}
         />
-        <InfoTitle>Laboratório 208 - Bloco B</InfoTitle>
+        <InfoTitle>Laboratório</InfoTitle>
         <DatePicker handlePickDate={handlePickDate} />
       </CalendarContainer>
       <ReservationViewerContainer>
@@ -37,7 +37,7 @@ export const ViewReservation: React.FC<IViewReservation> = ({
         <Table variant="simple" colorScheme="green">
           <Thead>
             <Tr>
-              <Th>Nome</Th>
+              <Th>Professor</Th>
               <Th>Data</Th>
               <Th>Hora</Th>
               <Th>Localização</Th>

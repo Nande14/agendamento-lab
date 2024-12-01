@@ -1,6 +1,6 @@
 import { TAvailabilityStatus } from "@/components/DatePicker/types";
 import axios from "axios";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 export const useCalendarManagement = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);

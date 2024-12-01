@@ -42,6 +42,8 @@
 
 body {
   background-image: url("/unicap-back.png") !important;
+  /* background-repeat: no-repeat !important;
+  background-size: cover !important; */
 }
 
 @media (prefers-color-scheme: dark) {

@@ -8,12 +8,12 @@ import {
   Container,
   InfoContainer,
   InfoItem,
+  InfoItemsContainer,
   InfoList,
   InfoTitle,
 } from "./styles";
 import { IViewCalendarManagement } from "./types";
 import Image from "next/image";
-
 import catolica from "../../../public/catholic.png";
 
 export const ViewCalendarManagement: React.FC<IViewCalendarManagement> = ({
@@ -32,7 +32,7 @@ export const ViewCalendarManagement: React.FC<IViewCalendarManagement> = ({
           height={1000}
         />
 
-        <InfoTitle>Laboratório 208 - Bloco B</InfoTitle>
+        <InfoTitle>Laboratório</InfoTitle>
 
         <InfoList>
           <InfoItem>
@@ -49,12 +49,12 @@ export const ViewCalendarManagement: React.FC<IViewCalendarManagement> = ({
             "Liberar", "Remover" ou "Feriado".
           </InfoItem>
 
-          <div>
+          <InfoItemsContainer>
             <InfoItem>Dias em Amarelo: Disponível</InfoItem>
             <InfoItem>Dias em Branco: Marcado</InfoItem>
             <InfoItem>Dias em Cinza: Removido</InfoItem>
             <InfoItem>Dias em Vermelho: Feriado</InfoItem>
-          </div>
+          </InfoItemsContainer>
         </InfoList>
       </InfoContainer>
 

@@ -1,4 +1,4 @@
-type TTeacher = {
+type TProfessor = {
   id: number;
   name: string;
 };
@@ -8,13 +8,21 @@ type TDiscipline = {
   name: string;
 };
 
+type TLaboratory = {
+  id: number;
+  name: string;
+  machineQuantity: string;
+  softwares: string;
+  observation: string;
+};
+
 export interface ISchedule {
   id: string;
-  teacher: TTeacher;
+  professor: TProfessor;
   discipline: TDiscipline;
+  laboratory: TLaboratory;
   start_time: string;
   end_time: string;
-  laboratory: string;
   description: string;
 }
 

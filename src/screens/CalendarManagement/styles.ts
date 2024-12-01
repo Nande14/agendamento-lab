@@ -40,6 +40,8 @@ export const InfoList = styled.ul`
   gap: 50px;
 `;
 
+export const InfoItemsContainer = styled.section``;
+
 export const InfoItem = styled.li`
   color: #8c8585;
   font-family: Inter;

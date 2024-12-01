@@ -24,9 +24,11 @@ import {
   FormControl,
   Select,
 } from "@chakra-ui/react";
-import { appointmentUrl } from "@/services";
+import { appointmentApi, appointmentUrl } from "@/services";
+import { formatDateTime } from "@/utils/formatDate";
+import { useFetch } from "@/hooks/useFetch";
 
-type TTeacher = {
+type TProfessor = {
   id: number;
   name: string;
 };
@@ -44,48 +46,38 @@ type TLaboratory = {
   observation: string;
 };
 
-interface Schedule {
+interface ISchedule {
   id: string;
-  teacher: TTeacher;
+  professor: TProfessor;
   discipline: TDiscipline;
   laboratory: TLaboratory;
   start_time: string;
   end_time: string;
+  description: string;
 }
 
-const formatDateTime = (dateTimeString: string): string => {
-  const date = new Date(dateTimeString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-
-  return `${day}/${month}/${year} ${hours}:${minutes}`;
-};
-
 const ScheduleManagement = () => {
-  const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
-    teacher_id: "",
-    subject_id: "",
+    professorId: "",
+    disciplineId: "",
     laboratoryId: "",
     start_time: "",
     end_time: "",
+    description: "",
   });
-  const [teachers, setTeachers] = useState<TTeacher[]>([]);
-  const [subjects, setSubjects] = useState<TDiscipline[]>([]);
+  const [professors, setProfessors] = useState<TProfessor[]>([]);
+  const [disciplines, setDisciplines] = useState<TDiscipline[]>([]);
   const [laboratories, setLaboratories] = useState<TLaboratory[]>([]);
 
-  const fetchTeachers = async () => {
+  const fetchProfessors = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         console.error("Token de autorização não encontrado.");
         return;
       }
-      const response = await axios.get<TTeacher[]>(
+      const response = await axios.get<TProfessor[]>(
         "https://agendamentoback-h2i55nsa.b4a.run/professor/get-all-professors",
         {
           headers: {
@@ -93,7 +85,7 @@ const ScheduleManagement = () => {
           },
         }
       );
-      setTeachers(response.data);
+      setProfessors(response?.data);
     } catch (error) {
       console.error("Erro ao buscar professores:", error);
     }
@@ -114,35 +106,22 @@ const ScheduleManagement = () => {
           },
         }
       );
-      setSubjects(response.data);
+      setDisciplines(response?.data);
     } catch (error) {
       console.error("Erro ao buscar disciplinas:", error);
     }
   };
 
-  const fetchSchedules = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("Token de autorização não encontrado.");
-        return;
-      }
-      const response = await axios.get<Schedule[]>(
-        "https://agendamentoback-h2i55nsa.b4a.run/schedule/get-all-schedules",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setSchedules(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar agendamentos:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    data: schedules,
+    mutate,
+    isLoading,
+  } = useFetch<ISchedule[]>(
+    "schedule/get-all-schedules",
+    {},
+    true,
+    appointmentApi
+  );
 
   const fetchLaboratories = async () => {
     try {
@@ -159,7 +138,7 @@ const ScheduleManagement = () => {
           },
         }
       );
-      setLaboratories(response.data);
+      setLaboratories(response?.data);
     } catch (error) {
       console.error("Erro ao buscar laboratórios:", error);
     }
@@ -169,11 +148,14 @@ const ScheduleManagement = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
+
+  console.log({ formData });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -183,24 +165,25 @@ const ScheduleManagement = () => {
         throw new Error("Token de autorização não encontrado.");
       }
       if (
-        !formData.teacher_id ||
-        !formData.subject_id ||
-        !formData.start_time ||
-        !formData.end_time
+        !formData?.professorId ||
+        !formData?.disciplineId ||
+        !formData?.laboratoryId ||
+        !formData?.start_time ||
+        !formData?.end_time
       ) {
         throw new Error("Todos os campos devem ser preenchidos.");
       }
 
       const dataToSend = {
-        teacher_id: Number(formData.teacher_id),
-        subject_id: Number(formData.subject_id),
-        start_time: new Date(formData.start_time).toISOString(),
-        end_time: new Date(formData.end_time).toISOString(),
-        description: "Dado mockado",
-        class: "Dado mockado",
+        professorId: Number(formData?.professorId),
+        disciplineId: Number(formData?.disciplineId),
+        laboratoryId: Number(formData?.laboratoryId),
+        description: formData?.description,
+        start_time: new Date(formData?.start_time)?.toISOString(),
+        end_time: new Date(formData?.end_time)?.toISOString(),
       };
 
-      const response = await axios.post<Schedule>(
+      const response = await axios.post<ISchedule>(
         "https://agendamentoback-h2i55nsa.b4a.run/schedule/register-schedule",
         dataToSend,
         {
@@ -210,14 +193,16 @@ const ScheduleManagement = () => {
         }
       );
 
+      mutate();
+
       if (response.status === 200) {
-        await fetchSchedules();
         setFormData({
-          teacher_id: "",
-          subject_id: "",
+          professorId: "",
+          disciplineId: "",
           laboratoryId: "",
           start_time: "",
           end_time: "",
+          description: "",
         });
       } else {
         throw new Error("Erro ao agendar horário. Tente novamente mais tarde.");
@@ -242,7 +227,7 @@ const ScheduleManagement = () => {
           },
         }
       );
-      setSchedules(schedules.filter((schedule) => schedule.id !== id));
+      mutate();
     } catch (error) {
       console.error("Erro ao excluir agendamento:", error);
     }
@@ -260,9 +245,8 @@ const ScheduleManagement = () => {
   }, []);
 
   useEffect(() => {
-    fetchTeachers();
+    fetchProfessors();
     fetchSubjects();
-    fetchSchedules();
     fetchLaboratories();
   }, []);
 
@@ -284,30 +268,30 @@ const ScheduleManagement = () => {
               <VStack spacing="4">
                 <FormControl>
                   <Select
-                    name="teacher_id"
+                    name="professorId"
                     placeholder="Selecione o Professor"
-                    value={formData.teacher_id}
+                    value={formData?.professorId}
                     onChange={handleChange}
                     required
                   >
-                    {teachers.map((teacher) => (
-                      <option key={teacher.id} value={teacher.id}>
-                        {teacher.name}
+                    {professors?.map((professor) => (
+                      <option key={professor?.id} value={professor?.id}>
+                        {professor?.name}
                       </option>
                     ))}
                   </Select>
                 </FormControl>
                 <FormControl>
                   <Select
-                    name="subject_id"
+                    name="disciplineId"
                     placeholder="Selecione a Disciplina"
-                    value={formData.subject_id}
+                    value={formData?.disciplineId}
                     onChange={handleChange}
                     required
                   >
-                    {subjects.map((subject) => (
-                      <option key={subject.id} value={subject.id}>
-                        {subject.name}
+                    {disciplines?.map((discipline) => (
+                      <option key={discipline?.id} value={discipline?.id}>
+                        {discipline?.name}
                       </option>
                     ))}
                   </Select>
@@ -316,22 +300,31 @@ const ScheduleManagement = () => {
                   <Select
                     name="laboratoryId"
                     placeholder="Selecione o Laboratório"
-                    value={formData.laboratoryId}
+                    value={formData?.laboratoryId}
                     onChange={handleChange}
                     required
                   >
-                    {laboratories.map((laboratory) => (
-                      <option key={laboratory.id} value={laboratory.id}>
-                        {laboratory.name}
+                    {laboratories?.map((laboratory) => (
+                      <option key={laboratory?.id} value={laboratory?.id}>
+                        {laboratory?.name}
                       </option>
                     ))}
                   </Select>
                 </FormControl>
                 <FormControl>
                   <Input
+                    name="description"
+                    placeholder="Descrição"
+                    value={formData?.description}
+                    onChange={handleChange}
+                    required
+                  />
+                </FormControl>
+                <FormControl>
+                  <Input
                     type="datetime-local"
                     name="start_time"
-                    value={formData.start_time}
+                    value={formData?.start_time}
                     onChange={handleChange}
                     required
                   />
@@ -340,7 +333,7 @@ const ScheduleManagement = () => {
                   <Input
                     type="datetime-local"
                     name="end_time"
-                    value={formData.end_time}
+                    value={formData?.end_time}
                     onChange={handleChange}
                     required
                   />
@@ -369,17 +362,17 @@ const ScheduleManagement = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {schedules.map((schedule) => (
-                      <Tr key={schedule.id}>
-                        <Td>{schedule?.teacher?.name}</Td>
+                    {schedules?.map((schedule) => (
+                      <Tr key={schedule?.id}>
+                        <Td>{schedule?.professor?.name}</Td>
                         <Td>{schedule?.discipline?.name}</Td>
                         <Td>{schedule?.laboratory?.name}</Td>
-                        <Td>{formatDateTime(schedule.start_time)}</Td>
-                        <Td>{formatDateTime(schedule.end_time)}</Td>
+                        <Td>{formatDateTime(schedule?.start_time)}</Td>
+                        <Td>{formatDateTime(schedule?.end_time)}</Td>
                         <Td>
                           <Button
                             colorScheme="red"
-                            onClick={() => handleDelete(schedule.id)}
+                            onClick={() => handleDelete(schedule?.id)}
                           >
                             Excluir
                           </Button>

@@ -4,4 +4,5 @@ export interface defaultIconProps {
   primaryColor?: string;
   secondaryColor?: string;
   tertiaryColor?: string;
+  quaternaryColor?: string;
 }

@@ -5,7 +5,6 @@ import {
   LoginContainer,
   ButtonContainer,
   LoginTitle,
-  FormButton,
   LoginForm,
   EmailInput,
   PasswordInputContainer,
@@ -13,6 +12,11 @@ import {
   EyeIconContainer,
   UnBlockedEyeIcon,
   BlockedEyeIcon,
+  LoginOptionText,
+  GoogleIcon,
+  LoginButton,
+  GoogleLoginButton,
+  GoogleLoginText,
 } from "./styles";
 import { IViewLogin } from "./types";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -67,16 +71,24 @@ export const ViewLogin = ({
                   )}
                 </EyeIconContainer>
               </PasswordInputContainer>
+
               <ReCAPTCHA
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                 data-type="image"
                 onChange={handleVerifyRecaptcha}
               />
+
               <ButtonContainer>
-                <FormButton type="submit" isDisabled={!isButtonDisabled}>
+                <LoginButton type="submit" isDisabled={!isButtonDisabled}>
                   Acessar
-                </FormButton>
-                <FormButton onClick={handleOauth}>Login social</FormButton>
+                </LoginButton>
+
+                <LoginOptionText>ou</LoginOptionText>
+
+                <GoogleLoginButton onClick={handleOauth}>
+                  <GoogleIcon />{" "}
+                  <GoogleLoginText>Logar com conta Google</GoogleLoginText>
+                </GoogleLoginButton>
               </ButtonContainer>
             </FormControl>
           </LoginForm>
