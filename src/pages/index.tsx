@@ -358,6 +358,7 @@ const ScheduleManagement = () => {
                       <Th>Laboratório</Th>
                       <Th>Hora de Início</Th>
                       <Th>Hora de Término</Th>
+                      <Th>Descrição</Th>
                       <Th>Ações</Th>
                     </Tr>
                   </Thead>
@@ -369,6 +370,7 @@ const ScheduleManagement = () => {
                         <Td>{schedule?.laboratory?.name}</Td>
                         <Td>{formatDateTime(schedule?.start_time)}</Td>
                         <Td>{formatDateTime(schedule?.end_time)}</Td>
+                        <Td>{schedule?.description}</Td>
                         <Td>
                           <Button
                             colorScheme="red"
