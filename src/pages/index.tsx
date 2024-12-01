@@ -220,7 +220,7 @@ const ScheduleManagement = () => {
         return;
       }
       await axios.delete(
-        `https://agendamentoback-h2i55nsa.b4a.run/schedule/delete-schedule/${id}`,
+        `https://agendamentoback-h2i55nsa.b4a.run/schedule/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
