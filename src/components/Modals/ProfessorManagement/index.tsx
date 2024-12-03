@@ -40,7 +40,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
         setLoading(true);
         const response = await axios.get(
-          `https://agendamentoback-h2i55nsa.b4a.run/professor/${teacherId}`,
+          `https://agendamentolabback-42tkkyxe.b4a.run/professor/${teacherId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
       setLoading(true);
       await axios.put(
-        `https://agendamentoback-h2i55nsa.b4a.run/professor/${teacher.id}`,
+        `https://agendamentolabback-42tkkyxe.b4a.run/professor/${teacher.id}`,
         teacher,
         {
           headers: {
@@ -108,7 +108,7 @@ const TeacherModal: React.FC<TeacherModalProps> = ({
 
       setLoading(true);
       await axios.delete(
-        `https://agendamentoback-h2i55nsa.b4a.run/professor/${teacher.id}`,
+        `https://agendamentolabback-42tkkyxe.b4a.run/professor/${teacher.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

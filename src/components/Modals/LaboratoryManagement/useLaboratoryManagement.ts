@@ -21,7 +21,7 @@ export const useLaboratoryManagement = ({
 
         setLoading(true);
         const response = await axios.get(
-          `https://agendamentoback-h2i55nsa.b4a.run/laboratory/${laboratoryId}`,
+          `https://agendamentolabback-42tkkyxe.b4a.run/laboratory/${laboratoryId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ export const useLaboratoryManagement = ({
 
       setLoading(true);
       await axios.put(
-        `https://agendamentoback-h2i55nsa.b4a.run/laboratory/${laboratory.id}`,
+        `https://agendamentolabback-42tkkyxe.b4a.run/laboratory/${laboratory.id}`,
         laboratory,
         {
           headers: {
@@ -96,7 +96,7 @@ export const useLaboratoryManagement = ({
 
       setLoading(true);
       await axios.delete(
-        `https://agendamentoback-h2i55nsa.b4a.run/laboratory/${laboratory.id}`,
+        `https://agendamentolabback-42tkkyxe.b4a.run/laboratory/${laboratory.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

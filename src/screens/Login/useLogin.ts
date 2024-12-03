@@ -23,7 +23,7 @@ export const useLogin = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://agendamentoback-h2i55nsa.b4a.run/user/login",
+        "https://agendamentolabback-42tkkyxe.b4a.run/user/login",
         {
           method: "POST",
           headers: {

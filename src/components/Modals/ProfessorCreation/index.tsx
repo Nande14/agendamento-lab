@@ -50,7 +50,7 @@ const ModalCreateTeacher: React.FC<ModalCreateTeacherProps> = ({
       }
 
       const response = await axios.post(
-        "https://agendamentoback-h2i55nsa.b4a.run/professor/create-professor",
+        "https://agendamentolabback-42tkkyxe.b4a.run/professor/create-professor",
         formData,
         {
           headers: {

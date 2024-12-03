@@ -51,7 +51,7 @@ const ModalCreateLaboratory: React.FC<ModalCreateLaboratoryProps> = ({
       }
 
       const response = await axios.post(
-        "https://agendamentoback-h2i55nsa.b4a.run/laboratory/register-laboratory",
+        "https://agendamentolabback-42tkkyxe.b4a.run/laboratory/register-laboratory",
         formData,
         {
           headers: {

@@ -78,7 +78,7 @@ const ScheduleManagement = () => {
         return;
       }
       const response = await axios.get<TProfessor[]>(
-        "https://agendamentoback-h2i55nsa.b4a.run/professor/get-all-professors",
+        "https://agendamentolabback-42tkkyxe.b4a.run/professor/get-all-professors",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ const ScheduleManagement = () => {
         return;
       }
       const response = await axios.get<TDiscipline[]>(
-        "https://agendamentoback-h2i55nsa.b4a.run/discipline/get-all-disciplines",
+        "https://agendamentolabback-42tkkyxe.b4a.run/discipline/get-all-disciplines",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -131,7 +131,7 @@ const ScheduleManagement = () => {
         return;
       }
       const response = await axios.get<TLaboratory[]>(
-        "https://agendamentoback-h2i55nsa.b4a.run/laboratory/get-all-laboratories",
+        "https://agendamentolabback-42tkkyxe.b4a.run/laboratory/get-all-laboratories",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -184,7 +184,7 @@ const ScheduleManagement = () => {
       };
 
       const response = await axios.post<ISchedule>(
-        "https://agendamentoback-h2i55nsa.b4a.run/schedule/register-schedule",
+        "https://agendamentolabback-42tkkyxe.b4a.run/schedule/register-schedule",
         dataToSend,
         {
           headers: {
@@ -220,7 +220,7 @@ const ScheduleManagement = () => {
         return;
       }
       await axios.delete(
-        `https://agendamentoback-h2i55nsa.b4a.run/schedule/${id}`,
+        `https://agendamentolabback-42tkkyxe.b4a.run/schedule/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

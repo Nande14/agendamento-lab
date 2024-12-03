@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const appointmentUrl = "https://agendamentoback-h2i55nsa.b4a.run";
+export const appointmentUrl = "https://agendamentolabback-42tkkyxe.b4a.run";
 const getToken = () => window.localStorage.getItem("token");
 
 export const appointmentApi = axios.create({

@@ -48,7 +48,7 @@ const ModalCreateDiscipline: React.FC<ModalCreateDisciplineProps> = ({
       }
 
       const response = await axios.post(
-        "https://agendamentoback-h2i55nsa.b4a.run/discipline/create-discipline",
+        "https://agendamentolabback-42tkkyxe.b4a.run/discipline/create-discipline",
         formData,
         {
           headers: {
