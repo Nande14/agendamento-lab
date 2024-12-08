@@ -89,8 +89,6 @@ const ModalCreateLaboratory: React.FC<ModalCreateLaboratoryProps> = ({
     setFormData(initialFormData);
   };
 
-  console.log({ formData });
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

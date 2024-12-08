@@ -70,7 +70,7 @@ export const ViewLaboratory = ({
                   <Tr>
                     <Th>Nome</Th>
                     <Th>Quantidade de máquinas</Th>
-                    <Th>Sofwares</Th>
+                    <Th>Softwares</Th>
                     <Th>Observações</Th>
                   </Tr>
                 </Thead>

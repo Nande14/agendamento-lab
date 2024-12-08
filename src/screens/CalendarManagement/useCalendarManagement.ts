@@ -32,8 +32,6 @@ export const useCalendarManagement = () => {
           },
         }
       );
-
-      console.log({ response });
     } catch (error) {
       console.error("Erro ao buscar status de dispobilidade:", error);
     } finally {

@@ -7,8 +7,9 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "@/components/Layout/Layout";
 import { layoutRoutes } from "@/const/pages";
-import { ThemeProvider } from "@emotion/react";
-import theme from "../styles/themes";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import chakraTheme from "../styles/themes";
+import styledTheme from "@/styles/styledTheme";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showLayout, setShowLayout] = useState<boolean>(false);
@@ -23,12 +24,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <ChakraProvider>
+    <StyledThemeProvider theme={styledTheme}>
+      <ChakraProvider theme={chakraTheme}>
         <Layout showLayout={showLayout}>
           <Component {...pageProps} />
         </Layout>
       </ChakraProvider>
-    </ThemeProvider>
+    </StyledThemeProvider>
   );
 }

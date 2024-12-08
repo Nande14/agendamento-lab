@@ -20,8 +20,6 @@ export const useReservation = () => {
     appointmentApi
   );
 
-  console.log({ schedules });
-
   const filterByDate = () => {
     if (!selectedDate) return;
 

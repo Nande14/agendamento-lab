@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     BACKEND_URL: process.env.BACKEND_URL,
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 export default nextConfig;

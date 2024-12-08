@@ -155,8 +155,6 @@ const ScheduleManagement = () => {
     }));
   };
 
-  console.log({ formData });
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
