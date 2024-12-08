@@ -11,7 +11,6 @@ import {
   useDisclosure,
   Icon,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { IconExit, Text } from "../SideBar/styles";
 
 export function SideBar() {
@@ -41,8 +40,8 @@ export function SideBar() {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="green" bg="green" onClick={onOpen}>
-        <Icon as={HamburgerIcon} color="#fff" />
+      <Button ref={btnRef} onClick={onOpen}>
+        <Icon  color="#fff" />
       </Button>
       <Drawer
         isOpen={isOpen}
